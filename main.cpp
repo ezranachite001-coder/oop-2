@@ -3,65 +3,57 @@
 #include <string>
 using namespace std;
 
-class Book
+class Student
 {
-    string title, author;
-    int copies;
+    string student_name;
+    int admission_number, fee_balance;
 
 public:
     void inputDetails()
     {
-        cout << "Enter book title: ";
-        getline(cin, title);
+        cout << "Enter Student name: ";
+        getline(cin, student_name);
 
-        cout << "Enter author: ";
-        getline(cin, author);
+        cout << "Enter admission number: ";
+        cin >> admission_number;
 
-        cout << "Enter number of copies: ";
-        cin >> copies;
-        cin.ignore();
+        cout << "Enter fee balance: ";
+        cin >> fee_balance;
     }
 
-    void borrowBook()
+    void makePayment()
     {
-        string bookTitle;
+        int payment_done;
 
-        cout << "Enter title of book to borrow: ";
-        getline(cin, bookTitle);
+        cout << "Enter amount you wish to pay: ";
+        cin >> payment_done;
 
-        if (bookTitle == title)
+        if (payment_done > 0 && payment_done <= fee_balance)
         {
-            if (copies > 0)
-            {
-                copies--;
-                cout << "Book borrowed successfully!" << endl;
-            }
-            else
-            {
-                cout << "No copies available!" << endl;
-            }
+            fee_balance -= payment_done;
+            cout << "Payment successful!" << endl;
         }
         else
         {
-            cout << "Book not found!" << endl;
+            cout << "Invalid amount!" << endl;
         }
     }
 
     void displayDetails()
     {
-        cout << "\nBook Title: " << title << endl;
-        cout << "Author: " << author << endl;
-        cout << "Available Copies: " << copies << endl;
+        cout << "\nStudent Name: " << student_name << endl;
+        cout << "Admission Number: " << admission_number << endl;
+        cout << "Remaining Balance: " << fee_balance << endl;
     }
 };
 
 int main()
 {
-    Book b1;
+    Student s1;
 
-    b1.inputDetails();
-    b1.borrowBook();
-    b1.displayDetails();
+    s1.inputDetails();
+    s1.makePayment();
+    s1.displayDetails();
 
     return 0;
 }
